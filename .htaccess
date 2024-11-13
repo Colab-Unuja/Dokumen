@@ -1,0 +1,56 @@
+# MULAI: Penataan Ulang URL dengan mod_rewrite
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.+?)\.html$ /$1 [NC,L,R=301]
+
+    # Menjaga header Otorisasi HTTP
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Mengarahkan permintaan ke index.php jika file atau direktori tidak ada
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+    # Memblokir akses ke direktori sensitif Laravel
+    RewriteRule ^(bootstrap|storage|tests|lang|vendor|database|config|resources|routes|app)/ - [F,L]
+</IfModule>
+# SELESAI: Penataan Ulang URL
+
+# MULAI: Pembatasan Akses File
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|env)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "(^\.|^composer\.|\.yml|\.xml|\.json|\.md|\.git|\.txt)">
+    Require all denied
+</FilesMatch>
+# SELESAI: Pembatasan Akses File
+
+# MULAI: Pengaturan Cache dengan mod_expires
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+# SELESAI: Pengaturan Cache
+
+# MULAI: Kompresi dengan mod_deflate
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript image/svg+xml
+</IfModule>
+# SELESAI: Kompresi
+
+# MULAI: Opsi dan Indeksasi
+Options +FollowSymLinks -Indexes
+IndexIgnore *
+ServerSignature Off
+# SELESAI: Opsi dan Indeksasi
+
