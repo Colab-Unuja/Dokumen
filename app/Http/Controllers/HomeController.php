@@ -9,7 +9,20 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(Request $request)
+    {
+        if (Auth::guard('user')->check()) {
+            $kategori = Auth::guard('user')->user()->kategori;
+            if ($kategori === 'admin' && !$request->is('admin/*')) {
+                return redirect()->route('admin.index');
+            } elseif ($kategori === 'karyawan' && !$request->is('karyawan/*')) {
+                return redirect()->route('karyawan.index');
+            } elseif ($kategori === 'mahasiswa' && !$request->is('mahasiswa/*')) {
+                return redirect()->route('mahasiswa.index');
+            } elseif ($kategori === 'dosen' && !$request->is('dosen/*')) {
+                return redirect()->route('dosen.index');
+            }
+        }
         return '';
     }
 
@@ -43,5 +56,25 @@ class HomeController extends Controller
         Auth::guard('user')->logout();
         session()->flush();
         return redirect()->route('index');
+    }
+
+    public function admin()
+    {
+        return view('admin.dashboard');
+    }
+
+    public function karyawan()
+    {
+        return '';
+    }
+
+    public function dosen()
+    {
+        return '';
+    }
+
+    public function mahasiswa()
+    {
+        return '';
     }
 }
