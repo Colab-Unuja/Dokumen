@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\RedisService;
 use Illuminate\Support\ServiceProvider;
+use Predis\Command\RedisFactory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+         $this->app->singleton(RedisService::class, function ($app) {
+            return new RedisService();
+        });
     }
 
     /**
