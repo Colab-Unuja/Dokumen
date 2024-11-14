@@ -33,7 +33,6 @@
                         <thead>
                         <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0 ">
                             <th class="w-25px"></th>
-                            <th class="min-w-150px">Actions</th>
                             <th class="min-w-150px">Unit</th>
                             <th class="min-w-150px">Singkatan</th>
                         </tr>

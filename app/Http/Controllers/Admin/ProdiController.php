@@ -12,7 +12,7 @@ class ProdiController extends Controller
     {
 
         if ($req->ajax()) {
-            $all = DB::table('master_prodi')->select('master_prodi.*','master_fakultas.fakultas')->orderByDesc('master_prodi.id_prodi')->get();
+            $all = DB::table('master_prodi')->select('master_prodi.*','master_fakultas.fakultas')->leftJoin('master_fakultas','master_fakultas.id_fakultas','=','master_prodi.id_fakultas')->orderByDesc('master_prodi.id_prodi')->get();
             return datatables()::of($all)
                 ->addIndexColumn()
                 ->addColumn('action', function ($model) {

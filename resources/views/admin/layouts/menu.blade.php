@@ -88,6 +88,14 @@
                                     <span class="menu-title">Lembaga</span>
                                 </a>
                             </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('admin.unit.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Unit</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
