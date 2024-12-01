@@ -96,6 +96,14 @@
                                     <span class="menu-title">Unit</span>
                                 </a>
                             </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('admin.surat.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Surat</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

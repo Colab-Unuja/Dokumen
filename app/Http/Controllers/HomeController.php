@@ -23,7 +23,7 @@ class HomeController extends Controller
                 return redirect()->route('dosen.index');
             }
         }
-        return '';
+        return '1';
     }
 
     public function login()

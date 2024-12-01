@@ -6,14 +6,15 @@ use App\Http\Controllers\Admin\KaryawanController;
 use App\Http\Controllers\Admin\LembagaController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\ProdiController;
+use App\Http\Controllers\Admin\SuratController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 // Rute publik
 Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('login', [HomeController::class, 'login'])->name('login');
-Route::post('login', [HomeController::class, 'auth_login'])->name('auth_login');
+Route::get('/login', [HomeController::class, 'login'])->name('login');
+Route::post('/login', [HomeController::class, 'auth_login'])->name('auth_login');
 Route::get('logout', [HomeController::class, 'logout'])->name('logout');
 
 // Rute untuk pengguna yang diautentikasi dengan middleware 'auth' dan 'check_akses'
@@ -30,6 +31,8 @@ Route::middleware(['auth:user', 'check_akses'])->group(function () {
         Route::get('unit/sync', [UnitController::class, 'create'])->name('unit.create');
         Route::get('dosen', [DosenController::class, 'index'])->name('dosen.index');
         Route::get('mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+        Route::resource('surat', SuratController::class);
+        Route::post('surat/edit/all', [SuratController::class, 'edit_multi'])->name('surat.edit.all');
     });
 
     // Rute Karyawan
