@@ -5,8 +5,8 @@ use App\Http\Controllers\Admin\FakultasController;
 use App\Http\Controllers\Admin\KaryawanController;
 use App\Http\Controllers\Admin\LembagaController;
 use App\Http\Controllers\Admin\MahasiswaController;
+use App\Http\Controllers\Admin\MarkerController;
 use App\Http\Controllers\Admin\ProdiController;
-use App\Http\Controllers\Admin\SuratController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -31,8 +31,8 @@ Route::middleware(['auth:user', 'check_akses'])->group(function () {
         Route::get('unit/sync', [UnitController::class, 'create'])->name('unit.create');
         Route::get('dosen', [DosenController::class, 'index'])->name('dosen.index');
         Route::get('mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
-        Route::resource('surat', SuratController::class);
-        Route::post('surat/edit/all', [SuratController::class, 'edit_multi'])->name('surat.edit.all');
+        Route::resource('marker', MarkerController::class);
+        Route::post('marker/edit/all', [MarkerController::class, 'edit_multi'])->name('marker.edit.all');
     });
 
     // Rute Karyawan

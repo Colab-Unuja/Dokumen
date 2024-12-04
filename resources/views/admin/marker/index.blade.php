@@ -7,7 +7,7 @@
 @endsection
 
 @section('title-header')
-    <h3>surat</h3>
+    <h3>marker</h3>
 @endsection
 
 @section('content')
@@ -15,27 +15,27 @@
         <div class="card mb-5 mb-xl-8 border-2 shadow p-3 mb-5 bg-white rounded">
             <div class="card-header">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bolder fs-3 mb-1">surat</span>
+                    <span class="card-label fw-bolder fs-3 mb-1">marker</span>
                 </h3>
                 <div class="card-toolbar">
 
-                    <div class="d-flex justify-content-end" data-kt-surat-table-toolbar="base">
-                        <a type="button" class="btn btn-sm btn-primary" href="{{ route('admin.surat.create') }}">Tambah surat</a>
+                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                        <a type="button" class="btn btn-sm btn-primary" href="{{ route('admin.marker.create') }}">Tambah marker</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="text-muted mb-3">
-                    Pada halaman ini digunakan untuk menambah, mengedit, dan detail surat
+                    Pada halaman ini digunakan untuk menambah, mengedit, dan detail marker
                 </div>
                 <div class="notice d-flex bg-light-primary border-primary mb-3 rounded border border-dashed p-3">
                     <div class="d-flex flex-stack">
                         <div>
-                            <div class="fs-12 text-gray-700">Berikut surat data.
+                            <div class="fs-12 text-gray-700">Berikut marker data.
                             </div>
                             <div class="fs-12 text-gray-700">
-                                <div style="color: #d80000; font-weight: 500;">Data surat adalah blok</div>
-                                <div style="color: #008c46 ; font-weight: 500;">Data surat adalah aktif</div>
+                                <div style="color: #d80000; font-weight: 500;">Data marker adalah blok</div>
+                                <div style="color: #008c46 ; font-weight: 500;">Data marker adalah aktif</div>
                             </div>
                         </div>
                     </div>
@@ -54,8 +54,6 @@
                             </th>
                             <th class="min-w-150px">Actions</th>
                             <th class="min-w-150px">Nama</th>
-                            <th class="min-w-150px">Unit</th>
-                            <th class="min-w-150px">versi</th>
                             <th class="min-w-150px">Status</th>
                         </tr>
                         </thead>
@@ -128,7 +126,7 @@
                 stateDuration: -1,
                 stateSave: true,
                 stateDuration: -1,
-                lengthsurat: [
+                lengthuser: [
                     [10, 25, 50, -1],
                     [10, 25, 50]
                 ],
@@ -175,7 +173,7 @@
                     }
 
 
-                    var rowId = data['id_template_surat'];
+                    var rowId = data['id_user'];
                     // If row ID is in the list of selected row IDs
                     if ($.inArray(rowId, rows_selected) !== -1) {
                         $(row).find('input[type="checkbox"]').prop('checked', true);
@@ -206,17 +204,17 @@
                     {
                         data: "action",
                         render: function (data) {
-                            var detail = '{{ route('admin.surat.show', [':surat']) }}';
-                            var edit = '{{ route('admin.surat.edit', [':surat']) }}';
+                            var detail = '{{ route('admin.marker.show', [':marker']) }}';
+                            var edit = '{{ route('admin.marker.edit', [':marker']) }}';
                             var x_edit = "";
                             var x_detail = "";
                             var x_delete = "";
 
                             x_detail =
-                                `<a data-toggle='tooltip' data-placement='top' title='View' href='${detail.replace(':surat', data)}' class='btn btn-icon btn-bg-light btn-active-text-primary btn-sm me-1'><span class='bi bi-file-text ' aria-hidden='true'></span></a>`;
+                                `<a data-toggle='tooltip' data-placement='top' title='View' href='${detail.replace(':marker', data)}' class='btn btn-icon btn-bg-light btn-active-text-primary btn-sm me-1'><span class='bi bi-file-text ' aria-hidden='true'></span></a>`;
 
                             x_edit =
-                                `<a data-toggle='tooltip' data-placement='top' title='Edit' href='${edit.replace(':surat', data)}' class='btn btn-icon btn-bg-light btn-active-text-primary btn-sm me-1'><span class='bi bi-pencil ' aria-hidden='true'></span> </a>`;
+                                `<a data-toggle='tooltip' data-placement='top' title='Edit' href='${edit.replace(':marker', data)}' class='btn btn-icon btn-bg-light btn-active-text-primary btn-sm me-1'><span class='bi bi-pencil ' aria-hidden='true'></span> </a>`;
 
                             x_delete =
                                 `<a data-toggle='tooltip' data-placement='top' title='Delete' onclick='deleteConfirmation(${data})' class='btn btn-icon btn-bg-light btn-active-text-primary btn-sm me-1'><span class='bi bi-trash ' aria-hidden='true'></span></a>`;
@@ -227,16 +225,8 @@
                         searchable: true,
                     },
                     {
-                        data: "nama_template",
-                        name: "nama_template"
-                    },
-                    {
-                        data: "unit",
-                        name: "unit"
-                    },
-                    {
-                        data: "versi",
-                        name: "versi"
+                        data: "marker",
+                        name: "marker"
                     },
                     {
                         data: "status",
@@ -248,7 +238,7 @@
             $('#example tbody').on('click', 'input[type="checkbox"]', function (e) {
                 var $row = $(this).closest('tr');
                 var data = table.row($row).data();
-                var rowId = data['id_template_surat'];
+                var rowId = data['id_user'];
                 var index = $.inArray(rowId, rows_selected);
                 if (this.checked && index === -1) {
                     rows_selected.push(rowId);
@@ -291,13 +281,13 @@
             $("#active").click(function () {
                 if (rows_selected.length > 0) {
                     $("#active").prop("disabled", true);
-                    var url = '{{ route('admin.surat.edit.all') }}';
+                    var url = '{{ route('admin.marker.edit.all') }}';
                     $.ajax({
                         url: url,
                         method: "POST",
                         data: {
                             "_token": "{{ csrf_token() }}",
-                            "id_template_surat": rows_selected,
+                            "id_user": rows_selected,
                             "status": "active",
 
                         },
@@ -305,7 +295,7 @@
                         async: false,
                         success: function (data) {
                             Swal.fire({
-                                title: 'surat',
+                                title: 'user',
                                 text: "Saved successfully",
                                 icon: 'success',
                                 confirmButtonColor: '#3085d6',
@@ -319,7 +309,7 @@
                         },
                         error: function (error) {
                             $("#active").prop("disabled", false);
-                            Swal.fire('surat', 'failed to approvel', 'error')
+                            Swal.fire('user', 'failed to approvel', 'error')
                         }
                     })
                 }
@@ -327,13 +317,13 @@
             $("#block").click(function () {
                 if (rows_selected.length > 0) {
                     $("#block").prop("disabled", true);
-                    var url = '{{ route('admin.surat.edit.all') }}';
+                    var url = '{{ route('admin.marker.edit.all') }}';
                     $.ajax({
                         url: url,
                         method: "POST",
                         data: {
                             "_token": "{{ csrf_token() }}",
-                            "id_template_surat": rows_selected,
+                            "id_user": rows_selected,
                             "status": "block",
 
                         },
@@ -341,7 +331,7 @@
                         async: false,
                         success: function (data) {
                             Swal.fire({
-                                title: 'surat',
+                                title: 'user',
                                 text: "Saved successfully",
                                 icon: 'success',
                                 confirmButtonColor: '#3085d6',
@@ -355,14 +345,14 @@
                         },
                         error: function (error) {
                             $("#block").prop("disabled", false);
-                            Swal.fire('surat', 'failed to approvel', 'error')
+                            Swal.fire('user', 'failed to approvel', 'error')
                         }
                     })
                 }
             });
         });
 
-        function deleteConfirmation(surat) {
+        function deleteConfirmation(user) {
             Swal.fire({
                 title: 'Apa kamu yakin?',
                 text: "Itu akan dihapus secara permanen!",
@@ -374,12 +364,12 @@
                 confirmButtonText: 'Ya, hapus!',
             }).then((result) => {
                 if (result.value) {
-                    var destroy = '{{ route('admin.surat.destroy', [':surat']) }}';
+                    var destroy = '{{ route('admin.marker.destroy', [':marker']) }}';
                     $.ajax({
-                        url: destroy.replace(':surat', surat),
+                        url: destroy.replace(':marker', user),
                         method: 'DELETE',
                         data: {
-                            "surat": surat,
+                            "user": user,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function (data) {

@@ -97,11 +97,11 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="{{ route('admin.surat.index') }}">
+                                <a class="menu-link" href="{{ route('admin.marker.index') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Surat</span>
+                                    <span class="menu-title">Penanda</span>
                                 </a>
                             </div>
                         </div>
